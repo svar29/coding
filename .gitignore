@@ -1,0 +1,60 @@
+*.json
+*.pickle
+*.csv
+*.xlsx
+*.class
+*.yml
+# Package Files #
+*.war
+*.ear
+.DS_Store
+### Eclipse ###
+*.pydevproject
+.project
+.metadata
+bin/**
+log/**
+logs/**
+tmp/**
+tmp/**/*
+out/**
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
+
+target/
+=======
+*.jar
+*.war
+*.ear
+
+dependency-reduced-pom.xml
+
+*.pyc
+
+### OS files ###
+.DS_Store
