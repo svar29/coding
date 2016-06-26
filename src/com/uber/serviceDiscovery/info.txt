@@ -1,0 +1,32 @@
+Node
+
+A node is basically any node in a data-centre. A node can have multiple services installed on it. Services that are defined
+need to implement the ServiceInstance abstract class.
+
+ServiceInstance
+
+A service installed a node is defined by an object instance of the class ServiceInstance.
+Each ServiceInstance needs to have a healthcheck.
+
+Packages
+- api: The api package defines the basic models for Node and ServiceInstance, and the service contracts.
+
+- client: The client package contains the implementations of the service contracts defined in the api package.
+It also contains some utilities that are required by the client implementation. The clients also "watch" the services
+that they are interested in, for services coming up/down.
+
+- server: This is the server which maintains the state of all services, which are up/down. The server received notifications
+from the clients installed on the nodes, who continuously health check the services installed on those nodes.
+
+
+Ideally, we could do a setup as follows:
+
+- Install health-checker module on a node, which will periodically checked for installed services on that node and
+register/de-register them on the central server.
+- Install a localized proxy on the node, and apps/services can actually talk to the localized proxy
+(thus assuming that they are talking to a LB). The localized proxy will get updated with the destination servers list
+ since the list will be updated by the watcher for these destination services installed on the node.
+- With the localized proxy, the apps do not need to talk to a "ServiceProvider" for them to get a ServiceInstance.
+This knowledge is abstracted away from them with a localized proxy.
+
+The implementation differs slightly from what is stated above.

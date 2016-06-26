@@ -53,6 +53,7 @@ class NodeValue(object):
         return str(self.value) + "->" + str(self.time.strftime("%d-%m-%y %H:%M:%S"))
 
 
+a = Q.deque()
 pq = Q.PriorityQueue()
 now = datetime.datetime.now()
 delta = datetime.timedelta(hours=1)

@@ -55,36 +55,3 @@ def nth_fibonacci(n):
 if __name__ == "__main__":
     n = int(raw_input("Find nth fibonacci. Enter n: "))
     print "nth_fibonacci", str(nth_fibonacci(n))
-
-
-def strictly_increasing(a,start,end,result,visited):
-    if start[0]>0 and start[0]<len(a) and start[1]>0 and start[1]<len(a[0]):
-        if start == end:
-            result = result + [a[start[0]][start[1]]]
-            return result, True
-        else:
-            print "visited", visited
-            if(not visited[start[0]][start[1]] and (a[start[0]][start[1]] > result[-1]) or not result):
-                result = result + [a[start[0]][start[1]]]
-            visited[start[0]][start[1]]=True
-            if (strictly_increasing(a,(start[0]+1,start[1]),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0],start[1]+1),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0]-1,start[1]),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0],start[1]-1),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0]+1,start[1]+1),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0]+1,start[1]-1),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0]-1,start[1]-1),end,result,visited)[1] or \
-                        strictly_increasing(a,(start[0]-1,start[1]+1),end,result,visited)[1]):
-                return result, True
-        visited[start[0]][start[1]]=False
-    return result, False
-a=[[1,2,3],[3,4,5],[5,6,7]]
-start=(0,1)
-end=(0,2)
-
-visited = [[False for i in range(3)] for j in range(3)]
-result, flag = strictly_increasing(a,start,end,[a[start[0]],a[start[1]]],visited)
-if flag:
-    print result
-else:
-    print "not possible"

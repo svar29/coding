@@ -3,7 +3,8 @@ __author__ = 'sharma.varun'
 k = 12
 arr = [[1, 2, 3], [4, 6, 5], [3, 2, 1]]
 
-dp = [[[-1]*(k+1) for _ in range(len(arr[0]))] for _ in range(len(arr))]
+dp = [[[-1] * (k + 1) for _ in range(len(arr[0]))] for _ in range(len(arr))]
+
 
 def num_path_k_coins(arr, i, j, k):
     print i, j, k
