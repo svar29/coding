@@ -1,6 +1,5 @@
 import com.agoda.model.F1Car;
-import com.agoda.service.F1Race;
-import org.junit.Before;
+import com.agoda.service.F1RaceService;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class F1RaceTest {
+public class F1RaceServiceTest {
 
     @Test
     public void useNitro() throws Exception {
@@ -21,7 +20,7 @@ public class F1RaceTest {
         List<F1Car> f1Cars = new ArrayList<F1Car>();
         f1Cars.add(car);
 
-        F1Race race = new F1Race(f1Cars, 700.0);
+        F1RaceService race = new F1RaceService(f1Cars, 700.0);
         // using nitro makes current speed double
         race.useNitro(car);
         assertEquals(true, car.getNitroUsed());
@@ -58,7 +57,7 @@ public class F1RaceTest {
         List<F1Car> f1Cars = new ArrayList<F1Car>();
         f1Cars.add(car1);
         f1Cars.add(car2);
-        F1Race race = new F1Race(f1Cars, 700.0);
+        F1RaceService race = new F1RaceService(f1Cars, 700.0);
 
         // if cars distance more than 10, no change in speed
         race.reduceSpeedIfCarNearBy(f1Cars);
@@ -93,7 +92,7 @@ public class F1RaceTest {
         List<F1Car> f1Cars = new ArrayList<F1Car>();
         f1Cars.add(car1);
         f1Cars.add(car2);
-        F1Race race = new F1Race(f1Cars, 700.0);
+        F1RaceService race = new F1RaceService(f1Cars, 700.0);
 
         // test happy flow
         List<F1Car> f1CarsFinsihedRace = new ArrayList<F1Car>();
@@ -137,7 +136,7 @@ public class F1RaceTest {
         List<F1Car> f1Cars = new ArrayList<F1Car>();
         f1Cars.add(car1);
         f1Cars.add(car2);
-        F1Race race = new F1Race(f1Cars, 700.0);
+        F1RaceService race = new F1RaceService(f1Cars, 700.0);
 
         race.reAssessment(race.getF1CarsInRace(), race.getF1CarsFinishedRace(), 2.0);
 
@@ -166,7 +165,7 @@ public class F1RaceTest {
 
     @Test
     public void simulateF1Race() throws Exception {
-        F1Race race = new F1Race(5, 700.0);
+        F1RaceService race = new F1RaceService(5, 700.0);
         while(!race.getF1CarsInRace().isEmpty())
         {
             race.reAssessment(race.getF1CarsInRace(), race.getF1CarsFinishedRace(), 2.0);

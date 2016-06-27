@@ -1,3 +1,5 @@
+package com.agoda;
+
 import com.agoda.model.Rate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.Configuration;

@@ -6,9 +6,7 @@ import com.agoda.model.ORDER;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,17 +26,8 @@ public class HotelService {
     }
 
     private CSVReader readFile(String fileName) throws FileNotFoundException {
-        URL url = this.getClass().getClassLoader().getResource(fileName);
-        try {
-            if (url != null) {
-                return new CSVReader(new FileReader(url.getFile()));
-            } else{
-                throw new FileNotFoundException("File not found in class path");
-            }
-        } catch (FileNotFoundException e) {
-            LOGGER.error("File not found:" + fileName, e);
-            throw e;
-        }
+        InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+        return new CSVReader(new InputStreamReader(inputStream));
     }
     private List<Hotel> loadHotels(String fileName) throws IOException {
         List<Hotel> hotels = new ArrayList<>();

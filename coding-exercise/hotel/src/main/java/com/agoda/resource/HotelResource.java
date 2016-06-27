@@ -3,6 +3,7 @@ package com.agoda.resource;
 import com.agoda.model.ORDER;
 import com.agoda.response.RateLimitExceededResponse;
 import com.agoda.service.HotelService;
+import com.agoda.service.InMemoryRateLimitService;
 import com.agoda.service.RateLimitService;
 import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
@@ -19,10 +20,10 @@ public class HotelResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(HotelResource.class);
 
     private HotelService hotelService;
-    private RateLimitService rateLimitService;
-    public HotelResource(HotelService hotelService, RateLimitService rateLimitService) {
+    private RateLimitService inMemoryRateLimitService;
+    public HotelResource(HotelService hotelService, RateLimitService inMemoryRateLimitService) {
         this.hotelService = hotelService;
-        this.rateLimitService = rateLimitService;
+        this.inMemoryRateLimitService = inMemoryRateLimitService;
     }
 
     /*
@@ -46,7 +47,7 @@ public class HotelResource {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
         */
-        if (!rateLimitService.validate(key)) {
+        if (!inMemoryRateLimitService.validate(key)) {
             LOGGER.info("RateLimit crossed for key: " + key);
             return Response.status(429).entity(new RateLimitExceededResponse()).build();
         }

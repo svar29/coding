@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class F1Race
+public class F1RaceService
 {
-	private static final Logger LOGGER = LoggerFactory.getLogger(F1Race.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(F1RaceService.class);
 
     // TODO these constants can be taken from config
     private static final Double HF = 0.8;
@@ -25,11 +25,11 @@ public class F1Race
 	private List<F1Car> f1CarsFinishedRace = new ArrayList<F1Car>();;
 
 
-	public F1Race(Integer numberOfCars, Double lengthOfTrack) {
+	public F1RaceService(Integer numberOfCars, Double lengthOfTrack) {
         this(getCarsListFromNumberOfCars(numberOfCars), lengthOfTrack);
     }
 
-    public F1Race(List<F1Car> f1CarsInRace, Double lengthOfTrack) {
+    public F1RaceService(List<F1Car> f1CarsInRace, Double lengthOfTrack) {
         this.f1CarsInRace = f1CarsInRace;
         this.lengthOfTrack = lengthOfTrack;
     }

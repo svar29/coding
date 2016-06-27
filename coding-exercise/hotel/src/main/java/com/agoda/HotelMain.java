@@ -1,6 +1,9 @@
+package com.agoda;
+
 import com.agoda.resource.HealthCheckResource;
 import com.agoda.resource.HotelResource;
 import com.agoda.service.HotelService;
+import com.agoda.service.InMemoryRateLimitService;
 import com.agoda.service.RateLimitService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -32,8 +35,8 @@ public class HotelMain extends Application<HotelConfiguration> {
         environment.jersey().register(new HealthCheckResource());
         LOGGER.info("Loading data from: " + configuration.getHoteldb());
         HotelService hotelService = new HotelService(configuration.getHoteldb());
-        RateLimitService rateLimitService = new RateLimitService(configuration.getGlobalRateLimit(), configuration.getRateLimitMap(), configuration.getSuspendTimeInMinutes());
-        environment.jersey().register(new HotelResource(hotelService, rateLimitService));
+        RateLimitService inMemoryRateLimitService = new InMemoryRateLimitService(configuration.getGlobalRateLimit(), configuration.getRateLimitMap(), configuration.getSuspendTimeInMinutes());
+        environment.jersey().register(new HotelResource(hotelService, inMemoryRateLimitService));
 
     }
 }
